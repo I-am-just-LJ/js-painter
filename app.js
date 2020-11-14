@@ -3,6 +3,8 @@ const ctx = canvas.getContext("2d");
 
 canvas.width = 700;
 canvas.height = 700;
+// CSS에서 적용한 픽셀과 실제 canvas에 적용되는 픽셀은 다르게 적용되기때문에 canvas의 픽셀을 지정해줘야함
+
 ctx.strokeStyle = "black";
 ctx.lineWidth = 2.5;
 
