@@ -4,11 +4,15 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 
-canvas.width = 700;
-canvas.height = 700;
+const INITIAL_COLOR = "black";
+const CANVAS_SIZE = 700;
+
+canvas.width = CANVAS_SIZE;
+canvas.height = CANVAS_SIZE;
 // CSS에서 적용한 픽셀과 실제 canvas에 적용되는 픽셀은 다르게 적용되기때문에 canvas의 픽셀을 지정해줘야함
 
-ctx.strokeStyle = "black";
+ctx.strokeStyle = INITIAL_COLOR;
+ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
 
 let painting = false;
@@ -34,16 +38,24 @@ function onMouseMove(event) {
   }
 }
 
+function handleCanvasClick() {
+  if (filling) {
+    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  }
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
+  canvas.addEventListener("click", handleCanvasClick);
 }
 
 function handleColorClick(event) {
   const color = event.target.style.backgroundColor;
   ctx.strokeStyle = color;
+  ctx.fillStyle = color;
 }
 
 Array.from(colors).forEach((color) =>
